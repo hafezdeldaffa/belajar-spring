@@ -10,18 +10,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DependencyInjectionConfiguration {
   @Bean
-  public Foo foo () {
+  public Foo foo() {
     return new Foo();
   }
 
   @Bean()
-  public Foo foo1 () {
+  public Foo foo1() {
     return new Foo();
   }
 
   @Bean
   public Bar bar() {
-    return  new Bar();
+    return new Bar();
   }
 
   @Bean
