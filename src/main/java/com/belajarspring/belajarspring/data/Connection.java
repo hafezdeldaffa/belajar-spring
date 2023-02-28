@@ -9,11 +9,11 @@ public class Connection implements InitializingBean, DisposableBean {
 
   @Override
   public void destroy() throws Exception {
-    log.info("Connection is ready to be used");
+    log.info("Connection is closed");
   }
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    log.info("Connection is closed");
+    log.info("Connection is ready to be used");
   }
 }
