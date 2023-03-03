@@ -1,5 +1,6 @@
 package com.belajarspring.belajarspring;
 
+import com.belajarspring.belajarspring.data.MultiFoo;
 import com.belajarspring.belajarspring.repository.CategoryRepository;
 import com.belajarspring.belajarspring.repository.CustomerRepository;
 import com.belajarspring.belajarspring.repository.ProductRepository;
@@ -48,8 +49,17 @@ public class ComponentTest {
   @Test
   void testFieldDependencyInjection() {
     CustomerService customerService = applicationContext.getBean(CustomerService.class);
-    CustomerRepository customerRepository = applicationContext.getBean(CustomerRepository.class);
 
-    Assertions.assertSame(customerRepository, customerService.getCustomerRepository());
+    CustomerRepository normalCustomerRepository = applicationContext.getBean("normalCustomerRepository",CustomerRepository.class);
+    CustomerRepository premiumCustomerRepository = applicationContext.getBean("premiumCustomerRepository",CustomerRepository.class);
+
+    Assertions.assertSame(normalCustomerRepository, customerService.getNormalCustomerRepository());
+    Assertions.assertSame(premiumCustomerRepository, customerService.getPremiumCustomerRepository());
+  }
+
+  @Test
+  void testObjectProvider() {
+    MultiFoo multiFoo = applicationContext.getBean(MultiFoo.class);
+    Assertions.assertEquals(3, multiFoo.getFoos().size());
   }
 }
