@@ -1,8 +1,10 @@
 package com.belajarspring.belajarspring;
 
 import com.belajarspring.belajarspring.repository.CategoryRepository;
+import com.belajarspring.belajarspring.repository.CustomerRepository;
 import com.belajarspring.belajarspring.repository.ProductRepository;
 import com.belajarspring.belajarspring.service.CategoryService;
+import com.belajarspring.belajarspring.service.CustomerService;
 import com.belajarspring.belajarspring.service.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,5 +43,13 @@ public class ComponentTest {
     CategoryRepository categoryRepository = applicationContext.getBean(CategoryRepository.class);
 
     Assertions.assertSame(categoryRepository, categoryService.getCategoryRepository());
+  }
+
+  @Test
+  void testFieldDependencyInjection() {
+    CustomerService customerService = applicationContext.getBean(CustomerService.class);
+    CustomerRepository customerRepository = applicationContext.getBean(CustomerRepository.class);
+
+    Assertions.assertSame(customerRepository, customerService.getCustomerRepository());
   }
 }
